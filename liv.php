@@ -13,10 +13,10 @@ require_once("./toolsbag.php");
 # iniciando a variável que 'conta a quantidade de cliques' na navegação do sistema.
 $salto=(ISSET($_REQUEST['salto'])) ? $_REQUEST['salto']:1;
 # iniciando a página
-iniciapagina(TRUE,"Méd","Abertura");
+iniciapagina(TRUE,"Livros","Abertura");
 # aqui vamos construir o menu do sistema
-montamenu('Médicos','med','Abertura',$salto);
-printf("Este sistema faz o Gerenciamento de dados da Tabela medicos.<br>\n");
+montamenu('Livros','liv','Abertura',$salto);
+printf("Este sistema faz o Gerenciamento de dados da Tabela livros.<br>\n");
 printf("O menu apresentado acima indica as funcionalidades do sistema.<br><br>\n");
 printf("Em cada tela do sistema são apresentados acessos para:<br>\n");
 printf("<ul>\n");
@@ -27,5 +27,5 @@ printf(" <li><u>Abertura</u> (Esta página);</li>\n");
 printf(" <li><u>Sair</u> do Sistema;</li>\n");
 printf("</ul><br>\n");
 printf(" <button onclick='history.go(-$salto)'>Sair</button>\n");
-terminapagina('Médicos',"Abertura",'med.php');
+terminapagina('Médicos',"Abertura",'liv.php');
 ?>

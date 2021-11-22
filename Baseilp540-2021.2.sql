@@ -1259,7 +1259,7 @@ CREATE TABLE IF NOT EXISTS `medicos` (
   CONSTRAINT `medicosce2` FOREIGN KEY (`ceinstens`) REFERENCES `instituicaodeensino` (`cpinstens`) ON UPDATE CASCADE,
   CONSTRAINT `medicosce3` FOREIGN KEY (`celogradouromoradia`) REFERENCES `logradouros` (`cplogradouro`) ON UPDATE CASCADE,
   CONSTRAINT `medicosce4` FOREIGN KEY (`celogradouroclinica`) REFERENCES `logradouros` (`cplogradouro`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Cadastro dos Médicos.';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Cadastro dos Livros.';
 
 -- Copiando dados para a tabela ilp54020212t.medicos: ~21 rows (aproximadamente)
 /*!40000 ALTER TABLE `medicos` DISABLE KEYS */;
@@ -1616,8 +1616,8 @@ INSERT INTO `planosdesaude` (`cpplanodesaude`, `txnomeplano`, `txrazaosocial`, `
 	(1, 'Administradora de Saúde Golden Cross S.A.', '', 4, '2344', 'Vila Nova California', '21231231', 's', '23423423', '2021-05-27'),
 	(2, 'Sulamerica ', 'Sulamerica Serviços de Saúde S.A.', 22, '3450 - 5ºAnd Conj.520', 'Vila Nova Saldanha', NULL, NULL, '04512786', '2015-04-20'),
 	(3, 'CiaSaude', 'Cooperativa Companhia da Saúde S.A.', 5, '450', 'Centro', '1574587485', 'José Almeida', '45124512', '2020-04-20'),
-	(4, 'UniMed-São Paulo', 'Cooperativa De Médicos Unidos - São Paulo S.A.', 5, '450', 'Centro', '1574587485', 'José Almeida', '45124512', '2020-04-20'),
-	(5, 'Unimed Ourinhos', 'Cooperativa de Médicos de Ourinhos e Região S.A.', 4, '3455', 'Vila Nova California', '11748574545', 'Juvenal', '01441414', '2021-05-27');
+	(4, 'UniMed-São Paulo', 'Cooperativa De Livros Unidos - São Paulo S.A.', 5, '450', 'Centro', '1574587485', 'José Almeida', '45124512', '2020-04-20'),
+	(5, 'Unimed Ourinhos', 'Cooperativa de Livros de Ourinhos e Região S.A.', 4, '3455', 'Vila Nova California', '11748574545', 'Juvenal', '01441414', '2021-05-27');
 /*!40000 ALTER TABLE `planosdesaude` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela ilp54020212t.professores

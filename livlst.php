@@ -10,14 +10,14 @@
 #            2021-11-08 - Revisão do PA para uso da variável de controle de Saltos entre os PA e montagem da navegabilidade 'dentro' do sistema.
 #####################################################################################################################################################
 require_once("./toolsbag.php");
-require_once("./medfun.php");
+require_once("./livfun.php");
 # determinando o valor da variável que permite escolha do bloco lógico a executar:- montagem da picklist ou de exibição dos dados do registro esoolhido.
 $bloco=( !ISSET($_REQUEST['bloco']) ) ? 1 : $_REQUEST['bloco'];
 # determinando as variáveis de controle de saltos entre funcionalidades do PA
 $menu=$_REQUEST['salto'];
 $salto=$_REQUEST['salto']+1;
 $cordefundo=($bloco<3) ? TRUE : FALSE;
-iniciapagina($cordefundo,"M&eacute;dicos","Listar");
+iniciapagina($cordefundo,"Livros","Listar");
 # Aqui será criado um SWITCH... CASE ... com 2 blocos:
 # divisor principal do programa.
 switch (TRUE)
@@ -25,8 +25,8 @@ switch (TRUE)
   case ( $bloco==1 ):
   { # CASE 1: Formulário para entrada de dados
     # iniciando o menu do sistema para os case 1 e 2.
-    montamenu("Médicos","med","Listar",$salto);
-    printf(" <form action='./medlst.php' method='post'>\n");
+    montamenu("Livros","liv","Listar",$salto);
+    printf(" <form action='./livlst.php' method='post'>\n");
     printf("  <input type='hidden' name='bloco' value=2>\n");
     printf("  <input type='hidden' name='salto' value='$salto'>\n");
     printf("  <table>\n");
@@ -67,7 +67,7 @@ switch (TRUE)
     $selecao=( $_REQUEST['ceespecialidade']!='TODAS' ) ? $selecao." AND M.ceespecialidade='$_REQUEST[ceespecialidade]'" : $selecao ;
     $cmdsql="SELECT * FROM medicostotal AS M".$selecao." ORDER BY $_REQUEST[ordem]";
     $execsql=mysqli_query($con,$cmdsql);
-    ($bloco==2) ? montamenu("M&eacute;dicos","medicos","Listar","$_REQUEST[salto]") : "";
+    ($bloco==2) ? montamenu("Livros","liv","Listar","$_REQUEST[salto]") : "";
     printf("<table border=1 style=' border-collapse: collapse; '>\n");
     printf(" <tr><td valign=top rowspan=2>Cod.</td>\n");
     printf("     <td valign=top rowspan=2>Nome:</td>\n");
@@ -131,5 +131,5 @@ switch (TRUE)
     break;
   }
 }
-terminapagina('Médicos',"Listar",'medlst.php');
+terminapagina('Livros',"Listar",'livlst.php');
 ?>

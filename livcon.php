@@ -10,13 +10,13 @@
 #            2021-11-08 - Revisão do PA para uso da variável de controle de Saltos entre os PA e montagem da navegabilidade 'dentro' do sistema.
 #####################################################################################################################################################
 require_once("./toolsbag.php");
-require_once("./medfun.php");
+require_once("./livfun.php");
 # determinando o valor da variável que permite escolha do bloco lógico a executar:- montagem da picklist ou de exibição dos dados do registro esoolhido.
 $bloco=( !ISSET($_REQUEST['bloco']) ) ? 1 : $_REQUEST['bloco'];
 $salto=$_REQUEST['salto']+1;
-iniciapagina(TRUE,'Med','Consultar');
+iniciapagina(TRUE,'Livros','Consultar');
 # aqui vamos construir o menu do sistema
-montamenu('Médicos','med','Consultar',$salto);
+montamenu('Livros','liv','Consultar',$salto);
 # divisor principal do programa.
 switch (TRUE)
 {
@@ -36,5 +36,5 @@ switch (TRUE)
   }
 }
 
-terminapagina('Médicos',"Consultar",'medcon.php');
+terminapagina('Livros',"Consultar",'livcon.php');
 ?>
