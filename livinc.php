@@ -26,33 +26,32 @@ switch (TRUE)
 {
   case ( $bloco==1 ):
   { # CASE 1: Formulário para entrada de dados
-    printf("  <form action='medinc.php' method='POST'>\n");
+    printf("  <form action='livinc.php' method='POST'>\n");
     printf("  <input type='hidden' name='bloco' value='2'>\n");
     printf("  <input type='hidden' name='salto' value='$salto'>\n");
     printf("  <table>\n");
     printf("   <tr><td>Código:</td>         <td>O código será gerado pelo Sistema</td></tr>\n");
-    printf("   <tr><td>Nome:</td>           <td><input type='text' name='txnomemedico' placeholder='' size=50 maxlength=200></td></tr>\n");
-    printf("   <tr><td>NuCRM:</td>          <td><input type='text' name='nucrm' placeholder='' size=8 maxlength=8>-Somente números</td></tr>\n");
+    printf("   <tr><td>Título:</td>           <td><input type='text' name='txttituloacervo' placeholder='' size=50 maxlength=200></td></tr>\n");
     printf("   <tr><td>Situação:</td>       <td><input type='radio' name='aosituacao' value='A' checked>-Ativado | <input type='radio' name='aosituacao' value='D'>-Desativado</td></tr>\n");
-    # Montando a Picklist para a Especialidade Médica (tabela: especmedicas)
-    printf("<tr><td>Especialidade:</td>     <td>");
-    $cmdsql="SELECT cpespecialidade,txnomeespecialidade from especmedicas order by txnomeespecialidade";
+    # Montando a Picklist para a Editora  (tabela: editoras)
+    printf("<tr><td>Editora:</td>     <td>");
+    $cmdsql="SELECT cpeditora,txnomeeditora from editoras order by txnomeeditora";
     $execcmd=mysqli_query($con,$cmdsql);
-    printf("<select name='ceespecialidade'>\n");
+    printf("<select name='cpeditora'>\n");
     while ( $reg=mysqli_fetch_array($execcmd) )
     {
-      printf("<option value='$reg[cpespecialidade]'>$reg[txnomeespecialidade]-($reg[cpespecialidade])</option>");
+      printf("<option value='$reg[cpeditora]'>$reg[txnomeeditora]-($reg[cpeditora])</option>");
     }
     printf("</select>\n");
     printf("</td></tr>\n");
     # Montando a Picklist para a Escola de Formação do médico (tabela: escolas)
-    printf("<tr><td>Escola de formação:</td><td>");
-    $cmdsql="SELECT cpinstens,txnomeinstens from instituicaodeensino order by txnomeinstens";
+    printf("<tr><td>Autores:</td><td>");
+    $cmdsql="SELECT cpautor,txnomeautor from autores order by txnomeautor";
     $execcmd=mysqli_query($con,$cmdsql);
-    printf("<select name='cpinstens'>\n");
+    printf("<select name='cpautor'>\n");
     while ( $reg=mysqli_fetch_array($execcmd) )
     {
-      printf("<option value='$reg[txnomeinstens]'>$reg[txnomeinstens]-($reg[cpinstens])</option>");
+      printf("<option value='$reg[txnomeautor]'>$reg[txnomeautor]-($reg[cpautor])</option>");
     }
     printf("</select>\n");
     printf("</td></tr>\n");
