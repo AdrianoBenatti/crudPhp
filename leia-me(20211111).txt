@@ -1,0 +1,15 @@
+Este é o registro dos trabalhos desenvolvidos no arquivo compactado que você acaba de baixar.
+Neste arquivo gerei a função sistêmica com nome barrabotoes(). Ela está escrita no arquivo toolsbag.php.
+Esta função recebe os parâmetros: ($acao,$limpa,$volta,$salto)
+$acao é um texto que é apresentado no botão de ação da aplicação que aciona a função.
+SE $acao estiver vazio ("") o botão não é emitido.
+$limpa e $volta são booleanos para indicar se os botões de reset e history.go(-1) devem ser emitidos.
+$salto é a variável de contagem de cliques pelos aplicativos (desde a tela de abertura do Sistema);
+Deste modo history.go(-$salto) sai do sistema em qualquer ponto da navegação entre as funcionalidades
+e history.go(-($salto-1)) volta para a tela de abertura do sistema em qualquer ponto da navegação.
+Este botões são apresentados pela função com os textos: Abertura e Sair, correspondendo a
+history.go(-($salto-1) e history.go(-salto), respectivamente.
+
+Todos os PA que implementam as funcionalidades e exibem a barra de botões foram revisados usando a
+função barrabotoes(). Os comandos que emitiam os botões nos PA foram mantidos entre comentários e 
+podem ser apagados para efeito de apresentação do código final do sistema.
