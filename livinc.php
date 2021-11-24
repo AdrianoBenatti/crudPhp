@@ -19,7 +19,7 @@ $bloco=( !ISSET($_REQUEST['bloco']) ) ? 1 : $_REQUEST['bloco'];
 $salto=$_REQUEST['salto']+1;
 iniciapagina(TRUE,"Livros","Incluir");
 # aqui vamos construir o menu do sistema
-montamenu('Lirvos','liv','Incluir',$salto);
+montamenu('Livros','liv','Incluir',$salto);
 # Aqui será criado um SWITCH... CASE ... com 2 blocos:
 # divisor principal do programa.
 switch (TRUE)

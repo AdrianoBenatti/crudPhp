@@ -31,19 +31,18 @@ switch (TRUE)
     printf("  <input type='hidden' name='salto' value='$salto'>\n");
     printf("  <table>\n");
     printf("   <tr><td colspan=2>Escolha a <negrito>ordem</negrito> como os dados serão exibidos no relatório:</td></tr>\n");
-    printf("   <tr><td>Código do Médico.:</td><td>(<input type='radio' name='ordem' value='M.cpmedico'>)</td></tr>\n");
-    printf("   <tr><td>Nome do Médico...:</td><td>(<input type='radio' name='ordem' value='M.txnomemedico' checked>)</td></tr>\n");
+    printf("   <tr><td>Nome do Livro:</td><td>(<input type='radio' name='ordem' value='M.txtituloacervo'>)</td></tr>\n");
+    printf("   <tr><td>Ano de publicação...:</td><td>(<input type='radio' name='ordem' value='M.nuanopublicacao' checked>)</td></tr>\n");
     printf("   <tr><td colspan=2>Escolha valores para seleção de <negrito>dados</negrito> do relatório:</td></tr>\n");
-    printf("   <tr><td>Escolha uma especialidade:</td><td>");
-    $cmdsql="SELECT cpespecialidade,txnomeespecialidade FROM especmedicas ORDER BY txnomeespecialidade";
+    printf("   <tr><td>Escolha uma editora:</td><td>");
+    $cmdsql="SELECT cpeditora,txnomeeditora from editoras order by txnomeeditora";
     $execcmd=mysqli_query($con,$cmdsql);
-    printf("<select name='ceespecialidade'>");
-    printf("<option value='TODAS'>Todas</option>");
+    printf("<select name='ceeditora'>\n");
     while ( $reg=mysqli_fetch_array($execcmd) )
     {
-      printf("<option value='$reg[cpespecialidade]'>$reg[txnomeespecialidade]-($reg[cpespecialidade])</option>");
+      printf("<option value='$reg[cpeditora]'>$reg[txnomeeditora]-($reg[cpeditora])</option>");
     }
-    printf("<select>\n");
+    printf("</select>\n");
     printf("</td></tr>\n");
     $dtini="1901-01-01";
     $dtfim=date("Y-m-d");
@@ -63,66 +62,49 @@ switch (TRUE)
 
 
     # Depois monta a tabela com os dados e a seguir um form permitindo que a listagem seja exibida para impressão em uma nova aba.
-    $selecao=" WHERE (M.dtcadmedico between '$_REQUEST[dtcadini]' and '$_REQUEST[dtcadfim]')";
-    $selecao=( $_REQUEST['ceespecialidade']!='TODAS' ) ? $selecao." AND M.ceespecialidade='$_REQUEST[ceespecialidade]'" : $selecao ;
-    $cmdsql="SELECT * FROM medicostotal AS M".$selecao." ORDER BY $_REQUEST[ordem]";
+    $selecao=" WHERE (M.dtcadlivro between '$_REQUEST[dtcadini]' and '$_REQUEST[dtcadfim]')";
+    $selecao=( $_REQUEST['ceeditora']!='TODAS' ) ? $selecao." AND M.ceeditora='$_REQUEST[ceeditora]'" : $selecao ;
+    $cmdsql="SELECT * FROM livros AS M".$selecao." ORDER BY $_REQUEST[ordem]";
     $execsql=mysqli_query($con,$cmdsql);
     ($bloco==2) ? montamenu("Livros","liv","Listar","$_REQUEST[salto]") : "";
     printf("<table border=1 style=' border-collapse: collapse; '>\n");
-    printf(" <tr><td valign=top rowspan=2>Cod.</td>\n");
-    printf("     <td valign=top rowspan=2>Nome:</td>\n");
-    printf("     <td valign=top rowspan=2>CRM</td>\n");
-    printf("     <td valign=top rowspan=2>Especialidade</td>\n");
-    printf("     <td valign=top rowspan=2>Inst.de Form.</td>\n");
-    printf("     <td valign=top colspan=4>Moradia</td>\n");
-    printf("     <td valign=top colspan=4>Clínica</td>\n");
-    printf("     <td valign=top rowspan=2>Situação</td>\n");
-    printf("     <td valign=top rowspan=2>Dt.Cad.</td></tr>\n");
-    printf(" <tr><td valign=top>Logr.</td>\n");
-    printf("     <td valign=top>Complemento</td>\n");
-    printf("     <td valign=top>CEP</td>\n");
-    printf("     <td valign=top>Tel</td>\n");
-    printf("     <td valign=top>Logr.</td>\n");
-    printf("     <td valign=top>Complemento</td>\n");
-    printf("     <td valign=top>CEP</td>\n");
-    printf("     <td valign=top>Tel</td></tr>\n");
+    printf(" <tr><td valign=top>Cod.</td>\n");
+    printf("     <td valign=top>Título</td>\n");
+    printf("     <td valign=top>Quantidade Exemplares</td>\n");
+    printf("     <td valign=top>Quantidade Exemplares Consulta</td>\n");
+    printf("     <td valign=top>Editora</td>\n");
+    printf("     <td valign=top>Ano Publicação</td>\n");
+    printf("     <td valign=top>Data Publicação</td>\n");
+    printf("     <td valign=top>Data Cadastro</td></tr>\n");
+
 	$corlinha="White";
     while ( $le=mysqli_fetch_array($execsql) )
     {
-      printf("<tr bgcolor=$corlinha><td>$le[cpmedico]</td>\n");
-      printf("   <td valign=top>$le[txnomemedico]</td>\n");
-      printf("   <td valign=top>$le[nucrm]</td>\n");
-      printf("   <td valign=top>$le[txnomeespecialidade]-($le[ceespecialidade])</td>\n");
-      printf("   <td valign=top>$le[txnomeinstituicaoensino]-($le[ceinstituicaoensino])</td>\n");
-      printf("   <td valign=top>$le[txnomelogrmoradia]-($le[celogradouromoradia])</td>\n");
-      printf("   <td valign=top>$le[txcomplementomoradia]</td>\n");
-      printf("   <td valign=top>$le[nucepmoradia]</td>\n");
-      printf("   <td valign=top>$le[nutelemoradia]</td>\n");
-      printf("   <td valign=top>$le[txnomelogrclinica]-($le[celogradouroclinica])</td>\n");
-      printf("   <td valign=top>$le[txcomplementoclinica]</td>\n");
-      printf("   <td valign=top>$le[nucepclinica]</td>\n");
-      printf("   <td valign=top>$le[nuteleclinica]</td>\n");
-      printf("   <td valign=top>$le[aosituacao]</td>\n");
-      printf("   <td valign=top>$le[dtcadmedico]</td></tr>\n");
+      printf("<tr bgcolor=$corlinha><td>$le[cplivro]</td>\n");
+      printf("   <td valign=top>$le[txtituloacervo]</td>\n");
+      printf("   <td valign=top>$le[qtexemplaresacervo]</td>\n");
+      printf("   <td valign=top>$le[qtexemplaresconsulta]</td>\n");
+      printf("   <td valign=top>$le[ceeditora]</td>\n");
+      printf("   <td valign=top>$le[nuanopublicacao]</td>\n");
+      printf("   <td valign=top>$le[dtpublicacao]</td>\n");
+      printf("   <td valign=top>$le[dtcadlivro]</td></tr>\n");
       $corlinha=( $corlinha=="White" ) ? "Navajowhite" : "White";
     }
     printf("</table>\n");
     if ( $bloco==2 )
     {
-      printf("<form action='./medlst.php' method='POST' target='_NEW'>\n");
+      printf("<form action='./livlst.php' method='POST' target='_NEW'>\n");
       printf(" <input type='hidden' name='bloco' value=3>\n");
       printf(" <input type='hidden' name='salto' value='$_REQUEST[salto]'>\n");
-      printf(" <input type='hidden' name='ceespecialidade' value=$_REQUEST[ceespecialidade]>\n");
+      printf(" <input type='hidden' name='ceeditora' value=$_REQUEST[ceeditora]>\n");
       printf(" <input type='hidden' name='dtcadini' value=$_REQUEST[dtcadini]>\n");
       printf(" <input type='hidden' name='dtcadfim' value=$_REQUEST[dtcadfim]>\n");
       printf(" <input type='hidden' name='ordem' value=$_REQUEST[ordem]>\n");
-      # <button type='submit'>Impressão</button>
-      /*printf(" <button type='submit'>Gerar cópia para Impressão</button>\n");
+      printf(" <button type='submit'>Gerar Impressão</button>\n");
       printf(" <button type='button' onclick='history.go(-1)'>Voltar</button>\n");
       printf(" <button type='button' onclick='history.go(-$menu)'>Abertura</button>\n");
-      printf(" <button type='button' onclick='history.go(-$salto)'>Sair</button>\n");*/
-      barrabotoes('Gerar cópia para Impressão',FALSE,TRUE,$salto);
-      printf("</form>\n");
+      printf(" <button type='button' onclick='history.go(-$salto)'>Sair</button>\n");
+      printf("</form>\n\n\n");
     }
     else
     {
